@@ -1,0 +1,186 @@
+{{#if isAdmin}}
+<div class="container py-5 h1">
+    <div class="row">
+        <div class="col-12 py-5">
+            <h1 class="text-center">{{username}}</h1>
+        </div>
+        <div class="col-12 px-5">
+            {{#if place}}
+            <h1 class="text-center py-3">Edit place</h1>
+            <form class="h1 p-5" action="/place/edit/{{place._id}}" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="place_name">Place Name</label>
+                    <input name="place_name" value={{place.place_name}} type="text" class="form-control" id="place_name"
+                        placeholder="Place name">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input name="address" value={{place.address}} type="text" class="form-control" id="address"
+                        placeholder="Address">
+                </div>
+                <div class="form-group">
+                    <label for="money_per_day">Money Per Day</label>
+                    <input name="money_per_day" value={{place.money_per_day}} type="number" class="form-control"
+                        id="money_per_day" placeholder="Money Per day">
+                </div>
+                <div class="form-group">
+                    <input type="file" name="pictures" multiple class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="category" value={{place.category}} class="form-control" id="category">
+                        <option disabled> Select Trip Type </option>
+                        <option value="historical">Historical</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="religious">Religious</option>
+                        <option value="recreational">Recreational</option>
+                        <option value="voluntary">Voluntary</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="hotels">Hotels</label>
+                    <input type="text" class="form-control" name="hotels" id="hotels">
+                </div>
+                <div class="form-group">
+                    <label for="resturants">Resturants</label>
+                    <input type="text" class="form-control" name="resturants" id="resturants">
+                </div>
+                <button type="submit" class="btn btn-block btn-primary">Edit </button>
+            </form>
+            {{else}}
+            <h1 class="text-center  py-3">Add new place</h1>
+            <form class="h1 p-5" action="/place" method="POST" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="place_name">Place Name</label>
+                    <input name="place_name" type="text" class="form-control" id="place_name" placeholder="Place name">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input name="address" type="text" class="form-control" id="address" placeholder="Address">
+                </div>
+                <div class="form-group">
+                    <label for="money_per_day">Money Per Day</label>
+                    <input name="money_per_day" type="number" class="form-control" id="money_per_day"
+                        placeholder="Money Per day">
+                </div>
+                <div class="form-group">
+                    <input type="file" name="pictures" multiple class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="category" class="form-control" id="category">
+                        <option disabled> Select Trip Type </option>
+                        <option value="historical">Historical</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="religious">Religious</option>
+                        <option value="recreational">Recreational</option>
+                        <option value="voluntary">Voluntary</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="hotels">Hotels</label>
+                    <input type="text" class="form-control" name="hotels" id="hotels">
+                </div>
+                <div class="form-group">
+                    <label for="resturants">Resturants</label>
+                    <input type="text" class="form-control" name="resturants" id="resturants">
+                </div>
+                <button type="submit" class="btn btn-block btn-primary">Save</button>
+            </form>
+            {{/if}}
+        </div>
+    </div>
+</div>
+<div class="p-5">
+    <hr>
+    <h1 class="text-center">Places </h1>
+    <table class="table h1">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Place Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Money Per Day</th>
+                <th scope="col">Category</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#if havePlace}}
+            {{#each places}}
+            <tr>
+                <th scope="row">#</th>
+                <td>{{this.place_name}}</td>
+                <td>{{this.address}}</td>
+                <td>{{this.money_per_day}}</td>
+                <td>{{this.category}}</td>
+                <td><a href="/place/delete/{{this._id}}">Delete</a></td>
+                <td><a href="/place/edit/{{this._id}}">Edit</a></td>
+            </tr>
+            {{/each}}
+            {{else}}
+            <tr class="text-center">
+                <td colspan="7">No places</td>
+            </tr>
+
+            {{/if}}
+        </tbody>
+
+
+    </table>
+</div>
+<div class="p-5">
+    <hr>
+    <h1 class="text-center">Booking </h1>
+    <table class="table h1">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">#Phone</th>
+                <th scope="col">Date</th>
+                <th scope="col">Duration</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#if haveBooking}}
+            {{#each booking}}
+            <tr>
+                <th scope="row">#</th>
+                <td>{{this.full_name}}</td>
+                <td>{{this.phone}}</td>
+                <td>{{this.date}}</td>
+                <td>{{this.duration}}</td>               
+            </tr>
+            {{/each}}
+            {{else}}
+            <tr class="text-center">
+                <td colspan="7">No Booking yet</td>
+            </tr>
+
+            {{/if}}
+        </tbody>
+
+
+    </table>
+</div>
+{{else}}
+<div class="container py-5 h1">
+    <div class="row py-5">
+        <div class="col-12 py-5">
+            <h1 class="text-center">{{username}}</h1>
+        </div>
+    </div>
+</div>
+{{/if}}

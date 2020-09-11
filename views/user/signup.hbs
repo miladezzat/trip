@@ -1,0 +1,23 @@
+<!--- Start of the form ------>
+<section class="Sign-Up-container">
+  <div class="container">
+    <div class="form-box">
+      {{#if hasErrors}}
+      <div class="alert alert-danger">
+        {{# each messages}}
+        <p>{{this}}</p>
+        {{/each}}
+      </div>
+      {{/if}}
+      <form class="signup-form" action="/user/signup" method="post">
+        <h3>Sign Up</h3>
+        <input class="form-input" placeholder="Full name" type="text" name="full_name">
+        <input class="form-input" placeholder="E-mail address" type="email" name="email">
+        <input class="form-input" placeholder="Password" type="password" name="password">
+        /<input type="hidden" name="_csrf" value="{{ csrfToken }}">
+        <button class="btn btn-form" type="submit" name="button">Register</button>
+        <p>Already have an account ? <a href="/user/signin">Sign in instead!</a> </p>
+      </form>
+    </div>
+  </div>
+</section>

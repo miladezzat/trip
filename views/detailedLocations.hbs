@@ -1,0 +1,65 @@
+<div class="container py-5">
+  <div class="locationImg">
+    <img src="C:\Users\sarah\Downloads\project\login-system-master\egypt-1197832_1280.jpg" alt="">
+  </div>
+  <div class="locationDetails">
+    <h5>location Name: {{place_name}}</h5>
+    <h5>Address: {{address}}</h5>
+    <h5>Nearest Hotels:{{hotels}}</h5>
+    <h5>Nearest Restaurants and Cafes:{{resturants}} </h5>
+    <h5>Description: {{description}}</h5>
+    <h5>Money Per Money: {{money_per_day}}</h5>
+    <h5>Category: {{category}}</h5>
+  </div>
+  <div class="row">
+    {{#each photos}}
+    <div class="col-4">
+      <img class="m-2 img-fluid"  src="/{{this}}"/>
+    </div>
+    {{/each}}
+  </div>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">
+    Book
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Personal Data</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/booking" method="post">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input class="form-control" type="text" name="full_name" >
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input class="form-control" type="tel" name="phone" >
+            </div>
+            <div class="form-group">
+              <label>Booking Date</label>
+              <input class="form-control" type="date" name="booking_date">
+            </div>
+            <div class="form-group">
+              <label>Duration</label>
+              <input class="form-control" type="number" name="duration">
+            </div>
+            <div class="form-group">
+              <label>Number of Persons</label>
+              <input class="form-control" type="number" name="num_persons">
+            </div>
+             <button type="submit" class="btn btn-primary">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
